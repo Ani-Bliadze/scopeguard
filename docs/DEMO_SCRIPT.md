@@ -34,4 +34,5 @@ Open `http://127.0.0.1:8000` and zoom the browser to 100%. Check the header badg
 ## Fallbacks
 
 - If the live LLM is slow or unavailable, the run falls back to the deterministic planner and answer adapter automatically. The UI labels the fallback and gives the reason. Alternatively, restart with `--mode deterministic`.
+- If you need something judges can open themselves, share the public website: https://scopeguard-ai-shield.lovable.app/
 - If the laptop or network fails, use the screenshots in `docs/screenshots/` (deterministic) and `docs/screenshots/live/` (live). Say clearly that they are screenshots.

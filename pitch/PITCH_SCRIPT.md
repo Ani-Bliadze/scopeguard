@@ -92,6 +92,8 @@ Read the footnote aloud: "Measured in a synthetic, task-scoped local demo, not a
 
 > **"Don't give agents more data. Give them a safer route."** Thank you. Happy to take questions.
 
+The slide shows the website (https://scopeguard-ai-shield.lovable.app/) and the code (https://github.com/Ani-Bliadze/scopeguard). Leave it up during Q&A.
+
 ---
 
 ## Judge Q&A

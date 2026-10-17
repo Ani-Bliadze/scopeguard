@@ -2,6 +2,8 @@
 
 **A data firewall that lets AI agents finish tasks without reading data they don't need.**
 
+**Website:** https://scopeguard-ai-shield.lovable.app/  ·  **Code:** https://github.com/Ani-Bliadze/scopeguard
+
 ![ScopeGuard dashboard, live LLM run of "Summarize September sales by region"](pitch/assets/demo-sales.png)
 
 - **Problem.** An agent asked to *"Summarize September sales by region"* can reach for a broad CRM tool. That would show the model 5,000 customers' emails and IDs to produce four numbers.

@@ -66,6 +66,8 @@ Full fresh-clone setup and evidence/deck regeneration: [README.md](../README.md)
 
 | Deliverable | Path |
 |---|---|
+| Public website | https://scopeguard-ai-shield.lovable.app/ (built with Lovable from `docs/LOVABLE_SITE_PROMPT.md`) |
+| Code | https://github.com/Ani-Bliadze/scopeguard (CI passing) |
 | Deck | `pitch/ScopeGuard_Pitch.pptx` (+ `pitch/ScopeGuard_Pitch.pdf`) |
 | Deck source | `pitch/build_deck.js` |
 | Pitch script | `pitch/PITCH_SCRIPT.md` |

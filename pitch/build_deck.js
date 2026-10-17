@@ -463,10 +463,15 @@ road.forEach((r, i) => {
   txt(s, r, { x: x + 0.15, y: 3.8, w: 2.45, h: 0.85, fontSize: 16, bold: true, valign: "middle", align: "center" });
   if (i < 3) arrow(s, x + 2.78, 4.22, 0.27, 0, K.muted, { width: 1.5 });
 });
-txt(s, "ScopeGuard · Agent Consent Studio · built and measured in one hackathon day", { x: 0.6, y: 4.95, w: 12.13, h: 0.4, fontSize: 14, color: K.muted });
+txt(s, [
+  { text: "Website  ", options: { color: K.muted } },
+  { text: "scopeguard-ai-shield.lovable.app", options: { color: K.sky, hyperlink: { url: "https://scopeguard-ai-shield.lovable.app/" } } },
+  { text: "     Code  ", options: { color: K.muted } },
+  { text: "github.com/Ani-Bliadze/scopeguard", options: { color: K.sky, hyperlink: { url: "https://github.com/Ani-Bliadze/scopeguard" } } },
+], { x: 0.6, y: 4.92, w: 12.13, h: 0.45, fontSize: 18, objectName: "links" });
 s.addNotes(
   "[3:20–3:40] Intended users, not customers: we claim no users, savings or partners. Roadmap items are not implemented.\n" +
-  "Close with the line on the slide, then invite questions. No public repository URL is shown because none is published yet.",
+  "Close with the line on the slide, then invite questions. Point at the links: the public website (https://scopeguard-ai-shield.lovable.app/) and the code (https://github.com/Ani-Bliadze/scopeguard).",
 );
 
 // ------------------------------------------------------------------ write + theme
