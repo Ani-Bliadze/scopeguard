@@ -134,7 +134,11 @@ async def create_session(body: SessionCreate, request: Request, response: Respon
 
 @router.get("/session")
 async def get_session(request: Request):
-    return _session_view(_sg(request), _session(request))
+    sg = _sg(request)
+    s = sg.sessions.get(request.cookies.get(COOKIE_NAME))
+    if s is None:
+        return {"active": False, "label": "No demo session yet: choose a persona."}
+    return {"active": True, **_session_view(sg, s)}
 
 
 @router.post("/session/access")

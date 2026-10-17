@@ -301,6 +301,7 @@ class Orchestrator:
                         decision=e.decision.value, reason_code=(e.reason_codes or ["-"])[0],
                         classes=[c.value for c in e.exposure.requested_classes] if e.exposure else [],
                         counts={"customer_rows_requested": e.exposure.customer_rows_requested if e.exposure else 0,
+                                "transaction_rows_requested": e.exposure.transaction_rows_requested if e.exposure else 0,
                                 "personal_values_requested": e.exposure.personal_field_values_requested if e.exposure else 0},
                         message=("selected" if e.selected else "not executed"))
         rejected = [e for e in evaluations if not e.selected]
