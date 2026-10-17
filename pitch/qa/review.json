@@ -1,0 +1,27 @@
+{
+  "deck": "ScopeGuard_Pitch.pptx",
+  "pptx_sha256": "ec2f357a80a0e4c73e2090ce5dd2c13e2d1ae9a8907049106850cb7467086fea",
+  "renderer": "Microsoft PowerPoint 16.0 via COM (pitch/render_deck.vbs), 1920x1080 PNG per slide",
+  "reviewer": "Claude Code (visual inspection of every rendered PNG and the montage)",
+  "review_rounds": 3,
+  "issues_found_and_fixed": [
+    "slide 1: centered title vs left-aligned body; subtitle hyphen-broke 'MCP-/powered' -> titles left-aligned, subtitle split onto its own line",
+    "slide 2: last field chip overflowed its card -> chip sizing reduced",
+    "slide 3: ScopeGuard flow ran past the card edge -> step widths/gaps reduced",
+    "slide 4: floating transport labels collided with box borders -> moved into node subtitles and a caption",
+    "slide 4: credential vault sat under Analytics -> CRM moved above the vault",
+    "slide 5: chips overlapped the rows column; header wrapped -> columns re-spaced, header shortened",
+    "slide 6: numbered callouts covered the numbers they referenced -> moved to tile corners and shrunk",
+    "slide 7: locale formatted labels as '10 000' -> explicit format '10,000'; tests line wrapped -> shortened"
+  ],
+  "slides": [
+    {"slide": 1, "checked": true, "status": "pass", "notes": "Exact hook title; agent -> blocked 5,000 (estimate) vs 4 delivered / 0 personal values; no overlap."},
+    {"slide": 2, "checked": true, "status": "pass", "notes": "Broad call code, registry-colored field chips, 5,000/10,000 estimates, fixture-size caption in notes; all within cards."},
+    {"slide": 3, "checked": true, "status": "pass", "notes": "Traditional 'Block and stop' vs 'Block, replan, complete'; three-layer graphic; tagline; flows inside cards."},
+    {"slide": 4, "checked": true, "status": "pass", "notes": "Native architecture diagram; backend-only credential attached to CRM; LLM sees sanitized result; allow/deny pills."},
+    {"slide": 5, "checked": true, "status": "pass", "notes": "Three plans with DENY / MORE EXPOSURE / SELECTED; estimate vs measured boxes; no collisions."},
+    {"slide": 6, "checked": true, "status": "pass", "notes": "Real live-mode UI screenshot, three beats, callouts on tile corners, honest caption."},
+    {"slide": 7, "checked": true, "status": "pass", "notes": "Exact evidence title; native editable chart from demo_results.json; stats; test counts; exact footnote."},
+    {"slide": 8, "checked": true, "status": "pass", "notes": "Intended users, roadmap labeled not built, exact closing line; no URL/QR."}
+  ]
+}

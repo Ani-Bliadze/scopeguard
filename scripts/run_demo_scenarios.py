@@ -129,6 +129,15 @@ def junit_counts(path: Path) -> dict | None:
     return agg
 
 
+def e2e_counts(path: Path) -> dict | None:
+    if not path.exists():
+        return None
+    st = json.loads(path.read_text(encoding="utf-8")).get("stats", {})
+    passed, failed = st.get("expected", 0), st.get("unexpected", 0)
+    return {"tests": passed + failed + st.get("flaky", 0) + st.get("skipped", 0), "passed": passed, "failures": failed,
+            "flaky": st.get("flaky", 0), "skipped": st.get("skipped", 0), "source": path.name}
+
+
 def run(mode: str, do_reset: bool) -> dict:
     if do_reset:
         from scripts.reset_demo import reset
@@ -212,7 +221,8 @@ def run(mode: str, do_reset: bool) -> dict:
             "scenarios": results,
             "model_boundary_scan": scan,
             "audit_scan": audit,
-            "tests": {"python": junit_counts(PROJECT_ROOT / ".runtime" / "test-results.xml")},
+            "tests": {"python": junit_counts(PROJECT_ROOT / ".runtime" / "test-results.xml"),
+                      "e2e": e2e_counts(PROJECT_ROOT / ".runtime" / "e2e-results.json")},
             "honesty_notes": [
                 "Candidate request sizes are registry/fixture-derived ESTIMATES for plans that were never executed.",
                 "Measured values come from the gateway, the private MCP client and the model boundary of this run.",
@@ -310,6 +320,9 @@ def write_markdown(doc: dict, path: Path) -> None:
     t = doc["tests"]["python"]
     if t:
         lines += ["", f"Python test run referenced: {t['passed']}/{t['tests']} passed ({t['failures']} failures, {t['errors']} errors)."]
+    e = doc["tests"].get("e2e")
+    if e:
+        lines += [f"Browser E2E run referenced: {e['passed']}/{e['tests']} passed ({e['failures']} failures)."]
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 

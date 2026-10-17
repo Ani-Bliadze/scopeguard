@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: "tests/e2e",
   timeout: 120_000,
   workers: 1,
-  reporter: [["list"]],
+  reporter: [["list"], ["json", { outputFile: ".runtime/e2e-results.json" }]],
   use: { baseURL: `http://127.0.0.1:${PORT}`, trace: "off", screenshot: "off", video: "off" },
   webServer: {
     command: `${PY} -m scripts.reset_demo && ${PY} -m scripts.run_local --mode deterministic --port ${PORT}`,
