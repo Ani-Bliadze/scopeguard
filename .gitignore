@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+.runtime/
+.venv/
+.venv-*/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+node_modules/
+frontend/dist/
+test-results/
+playwright-report/
+*.har
+*.trace.zip
+pitch/~$*

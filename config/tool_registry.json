@@ -1,0 +1,170 @@
+{
+  "registry_version": "2026-10-17.1",
+  "schema_version": "1.0",
+  "tools": [
+    {
+      "tool_id": "crm.get_customers",
+      "owner": "crm-platform (synthetic)",
+      "server_id": "crm",
+      "upstream_name": "get_customers",
+      "schema_version": "1.0",
+      "description": "Customer-level CRM records with selectable fields. Broad, row-level access.",
+      "row_kind": "customer",
+      "output_shape": "rows",
+      "max_rows": 5000,
+      "max_bytes": 2097152,
+      "approval_mode": "none",
+      "selectable_fields": true,
+      "fields": {
+        "id": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 4
+        },
+        "region": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 6
+        },
+        "display_name": {
+          "class": "PERSONAL",
+          "avg_value_bytes": 20
+        },
+        "email": {
+          "class": "PERSONAL",
+          "avg_value_bytes": 26
+        },
+        "synthetic_personal_id": {
+          "class": "PERSONAL",
+          "avg_value_bytes": 16
+        },
+        "total_spend_cents": {
+          "class": "CONFIDENTIAL",
+          "avg_value_bytes": 6
+        }
+      },
+      "schema_sha256": "5603666c894b9366b18726b2757d04c7a54833e54d805f425fd826ce5d25a062"
+    },
+    {
+      "tool_id": "analytics.get_transactions",
+      "owner": "analytics-platform (synthetic)",
+      "server_id": "analytics",
+      "upstream_name": "get_transactions",
+      "schema_version": "1.0",
+      "description": "Transaction-level sales rows for one month with selectable fields.",
+      "row_kind": "transaction",
+      "output_shape": "rows",
+      "max_rows": 5000,
+      "max_bytes": 2097152,
+      "approval_mode": "none",
+      "selectable_fields": true,
+      "fields": {
+        "id": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 5
+        },
+        "customer_id": {
+          "class": "CONFIDENTIAL",
+          "avg_value_bytes": 4
+        },
+        "region": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 6
+        },
+        "amount_cents": {
+          "class": "CONFIDENTIAL",
+          "avg_value_bytes": 5
+        },
+        "month": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 9
+        }
+      },
+      "schema_sha256": "3197c912aacf46927bb89064e326d275234f2d51027fad5324a03d7e590d08bb"
+    },
+    {
+      "tool_id": "analytics.get_sales_summary",
+      "owner": "analytics-platform (synthetic)",
+      "server_id": "analytics",
+      "upstream_name": "get_sales_summary",
+      "schema_version": "1.0",
+      "description": "Aggregated sales metric per region for one month, computed in SQL (minimum 20 distinct customers per group).",
+      "row_kind": "aggregate",
+      "output_shape": "aggregate",
+      "max_rows": 4,
+      "max_bytes": 16384,
+      "approval_mode": "none",
+      "selectable_fields": false,
+      "fields": {
+        "region": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 6
+        },
+        "value_cents": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 10
+        },
+        "transaction_count": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 4
+        }
+      },
+      "schema_sha256": "8a89e43c218dc5437ea5b1f3611e958491dcfbf7a308e2e2c5c69d4a9b068284"
+    },
+    {
+      "tool_id": "crm.get_connection_status",
+      "owner": "crm-platform (synthetic)",
+      "server_id": "crm",
+      "upstream_name": "get_connection_status",
+      "schema_version": "1.0",
+      "description": "Verifies the CRM connector using a backend-held credential; returns only a boolean status.",
+      "row_kind": "status",
+      "output_shape": "status",
+      "max_rows": 1,
+      "max_bytes": 1024,
+      "approval_mode": "none",
+      "selectable_fields": false,
+      "backend_secrets_used": {
+        "crm_api_key": "RESTRICTED_SECRET"
+      },
+      "fields": {
+        "connector": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 3
+        },
+        "connected": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 4
+        },
+        "verification": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 22
+        }
+      },
+      "schema_sha256": "c0da940208a0f23afce07d7c6ed2b76c29e8b3242bf31144b74b2a368dee7a40"
+    },
+    {
+      "tool_id": "crm.get_customer_contact",
+      "owner": "crm-platform (synthetic)",
+      "server_id": "crm",
+      "upstream_name": "get_customer_contact",
+      "schema_version": "1.0",
+      "description": "One customer's email address. Requires support role and a one-time scoped approval.",
+      "row_kind": "customer",
+      "output_shape": "single",
+      "max_rows": 1,
+      "max_bytes": 1024,
+      "approval_mode": "single_use_scoped",
+      "selectable_fields": true,
+      "fields": {
+        "customer_id": {
+          "class": "INTERNAL",
+          "avg_value_bytes": 3
+        },
+        "email": {
+          "class": "PERSONAL",
+          "avg_value_bytes": 26
+        }
+      },
+      "schema_sha256": "05452d5e92fe6dc90fd2c5935c568fe9d433ba77d8958febb8289778006b2549"
+    }
+  ]
+}

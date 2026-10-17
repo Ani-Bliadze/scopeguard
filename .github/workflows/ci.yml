@@ -1,0 +1,22 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: python -m scripts.reset_demo
+      - run: python -m ruff check backend mcp_servers scripts tests
+      - run: python -m pytest tests -q
+        env:
+          SCOPEGUARD_MODE: deterministic
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build

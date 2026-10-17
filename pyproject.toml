@@ -1,0 +1,27 @@
+[project]
+name = "scopeguard"
+version = "1.0.0"
+description = "ScopeGuard: privacy-aware data firewall for MCP-connected AI agents (hackathon MVP)"
+requires-python = ">=3.13,<3.14"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+  "unit: fast offline unit tests",
+  "integration: real MCP processes / HTTP server",
+  "security: security and negative-path tests",
+  "live: requires a configured live LLM key (skipped by default)",
+]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+extend-exclude = ["node_modules", "frontend", "pitch"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501", "B008", "UP040"]

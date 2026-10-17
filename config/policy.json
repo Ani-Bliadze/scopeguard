@@ -1,0 +1,61 @@
+{
+  "policy_version": "2026-10-17.1",
+  "default_decision": "DENY",
+  "hard_rules": {
+    "non_disclosable_classes": ["RESTRICTED_SECRET"],
+    "approval_can_never_override": ["RESTRICTED_SECRET"],
+    "description": "Secret values (API keys, passwords, tokens, private keys) may never be returned to the model. Backend connectors may use them internally."
+  },
+  "roles": {
+    "sales_analyst": {
+      "description": "May obtain sales aggregates. May not inspect customer-level personal data.",
+      "tasks": ["SALES_BY_REGION_2026_09", "CRM_CONNECTION_STATUS"]
+    },
+    "customer_support": {
+      "description": "May access one specific customer's email for a supported purpose after a scoped, one-time approval.",
+      "tasks": ["NOTIFY_CUSTOMER_105", "CRM_CONNECTION_STATUS"]
+    }
+  },
+  "tasks": {
+    "SALES_BY_REGION_2026_09": {
+      "purpose": "REGIONAL_SALES_REPORTING",
+      "model_visible_classes": ["PUBLIC", "INTERNAL"],
+      "max_tool_calls": 2,
+      "tools": {
+        "analytics.get_sales_summary": {
+          "decision": "ALLOW",
+          "constraints": {"month": "2026-09", "group_by": "region", "metric": "total_revenue"}
+        }
+      }
+    },
+    "CRM_CONNECTION_STATUS": {
+      "purpose": "CONNECTOR_HEALTH_CHECK",
+      "model_visible_classes": ["PUBLIC", "INTERNAL"],
+      "max_tool_calls": 1,
+      "tools": {
+        "crm.get_connection_status": {"decision": "ALLOW", "constraints": {}}
+      }
+    },
+    "NOTIFY_CUSTOMER_105": {
+      "purpose": "NOTIFY_CUSTOMER",
+      "model_visible_classes": ["PUBLIC", "INTERNAL", "PERSONAL"],
+      "max_tool_calls": 1,
+      "tools": {
+        "crm.get_customer_contact": {
+          "decision": "APPROVAL_REQUIRED",
+          "roles": ["customer_support"],
+          "constraints": {"customer_id": 105, "fields": ["email"]},
+          "approval_ttl_seconds": 120,
+          "single_use": true
+        }
+      }
+    },
+    "SECRET_DISCLOSURE_ATTEMPT": {
+      "purpose": "NONE",
+      "model_visible_classes": [],
+      "max_tool_calls": 0,
+      "terminal_decision": "HARD_DENY_SECRET_DISCLOSURE",
+      "tools": {}
+    }
+  }
+}
