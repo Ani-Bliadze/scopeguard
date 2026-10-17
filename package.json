@@ -9,7 +9,7 @@
     "typecheck": "npm run typecheck --workspace frontend",
     "build": "npm run build --workspace frontend",
     "test:e2e": "playwright test",
-    "capture:demo": "node scripts/capture_demo.mjs",
+    "capture:demo": "node scripts/capture_demo.mjs --out docs/screenshots",
     "pitch:build": "npm run build --workspace pitch"
   },
   "devDependencies": {

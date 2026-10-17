@@ -92,11 +92,11 @@ if (consoleErrors.length) {
   console.error("console errors:", consoleErrors);
   process.exit(1);
 }
-// Copy the deck's evidence screenshots
-if (W === 1600 && H === 1000) {
+// Optionally copy the deck's evidence screenshots (--assets)
+if (process.argv.includes("--assets")) {
   mkdirSync("pitch/assets", { recursive: true });
-  copyFileSync(join(OUT, "demo-sales-1600x1000.png"), "pitch/assets/demo-sales.png");
-  copyFileSync(join(OUT, "demo-secret-1600x1000.png"), "pitch/assets/demo-secret.png");
-  copyFileSync(join(OUT, "demo-connection-1600x1000.png"), "pitch/assets/demo-connection.png");
+  for (const n of ["sales", "secret", "connection", "probe", "approval-request"]) {
+    copyFileSync(join(OUT, `demo-${n}-${W}x${H}.png`), `pitch/assets/demo-${n}.png`);
+  }
 }
 console.log("captured", shots.length, "screenshots ->", OUT);
